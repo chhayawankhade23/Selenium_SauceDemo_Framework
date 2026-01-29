@@ -4,3 +4,6 @@ webdriver-manager
 allure-pytest
 pytest-xdist
 pytest-html
+openpyxl
+PyYAML
+pycparser
