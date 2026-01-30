@@ -1,76 +1,23 @@
-
+import os
 import logging
-from pathlib import Path
 class Loggen:
 
         @staticmethod
         def loggen():
-            Path("Logs").mkdir(exist_ok=True)
+
             logger=logging.getLogger("My framework")
             logger.setLevel(logging.INFO)
             if not logger.handlers:
-                file_handler= logging.FileHandler("C:\\Users\\chhay\\PycharmProjects\\Selenium_SauceDemo_Framework\\Logs\\automation.log")
+                BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                LOG_DIR = os.path.join(BASE_DIR, "Logs")
+                os.makedirs(LOG_DIR, exist_ok=True)
+                LOG_FILE = os.path.join(LOG_DIR, "automation.log")
+
+                file_handler = logging.FileHandler(LOG_FILE)
+
                 formatter=logging.Formatter(" %(asctime)s:%(levelname)s:%(message)s",datefmt="%m/%d/%Y %I:%M:%S %p")
                 file_handler.setFormatter(formatter)
                 logger.addHandler(file_handler)
-                logger.info("This will be logged")
+
             return logger
-# import logging
-# from pathlib import Path
-# from datetime import datetime
-#
-#
-# class Loggen:
-#
-#     @staticmethod
-#     def loggen():
-#
-#         log_dir = Path.cwd() / "Logs"
-#         log_dir.mkdir(exist_ok=True)
-#         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-#         log_file = log_dir / f"automation_{timestamp}.log"
-#
-#         logger = logging.getLogger("My framework")
-#         logger.setLevel(logging.INFO)
-#
-#         if not logger.handlers:
-#             file_handler = logging.FileHandler(log_file)
-#
-#             formatter = logging.Formatter(
-#                 "%(asctime)s : %(levelname)s : %(message)s",
-#                 datefmt="%m/%d/%Y %I:%M:%S %p"
-#             )
-#             file_handler.setFormatter(formatter)
-#
-#             logger.addHandler(file_handler)
-#
-#         return logger
-# import logging
-# from pathlib import Path
-#
-# class Loggen:
-#
-#     @staticmethod
-#     def loggen():
-#         # Get project root (2 levels up from this file)
-#         project_root = Path(__file__).resolve().parents[2]
-#
-#         # Create Logs folder at root level
-#         logs_dir = project_root / "Logs"
-#         logs_dir.mkdir(exist_ok=True)
-#
-#         log_file = logs_dir / "automation.log"
-#
-#         logger = logging.getLogger("SauceDemoFramework")
-#         logger.setLevel(logging.INFO)
-#
-#         if not logger.handlers:
-#             file_handler = logging.FileHandler(log_file)
-#             formatter = logging.Formatter(
-#                 "%(asctime)s : %(levelname)s : %(message)s",
-#                 datefmt="%d-%m-%Y %H:%M:%S"
-#             )
-#             file_handler.setFormatter(formatter)
-#             logger.addHandler(file_handler)
-#
-#         return logger
+
